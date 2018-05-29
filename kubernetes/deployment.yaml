@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dc-msvc-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dc-msvc
+  template:
+    metadata:
+      labels:
+        app: dc-msvc
+    spec:
+      containers:
+      - name: dc-micro-service
+        image: 'registry.ng.bluemix.net/dc-micro-service/dc-micro-service:2018-05-25.0'
+        env:
+          - name: PORT
+            value: "8080"
+          - name: VARIABLE
+            value: "value"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "0.25"
+          limits:
+            memory: "1024Mi"
+            cpu: "0.75"
+        ports:
+        - containerPort: 8080
+          name: dc-api

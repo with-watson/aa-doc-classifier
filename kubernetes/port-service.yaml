@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dc-msvc-port-service
+spec:
+  selector:
+    app: dc-msvc
+  ports:
+   - name: dc-msvc-port
+     protocol: TCP
+     port: 8080
